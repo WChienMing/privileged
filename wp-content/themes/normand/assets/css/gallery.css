@@ -29,7 +29,8 @@ button[aria-expanded=false] .fa-angle-down {
 }
 
 .gallery-button {
-  background-color: #c1966b;
+  /* background-color: #c1966b; */
+  background-color: #95918d !important;
   border-radius: 20px;
   padding: 20px 20px !important;
   color: white !important;

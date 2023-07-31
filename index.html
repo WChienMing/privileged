@@ -1249,6 +1249,8 @@
 	  transform: translateY(0);
 	  opacity: 1;
 	}
+
+    
     </style>
     <link rel='stylesheet' id='normand-global-css' href='./wp-content/themes/normand/assets/css/global.min.css?ver=2.0.9' type='text/css' media='all' />
     <script type='text/javascript' id='normand-navigation-js-extra'>
@@ -1577,8 +1579,8 @@
                     <div class="featured-team-grid reveal">
                         <div class="first-featured-team-member featured-team-member">
                             <figure class="normand-st-reveal-img first"><img decoding="async" class="first-team-img" src="./wp-content/new_upload/image/image_silver.png" alt="Ed Normand Bio Image" loading="lazy" /></figure>
-                            <div class="first-team-text normand-st-reveal normand-st-reveal-right">
-                                <div class="first-team-role" style="">
+                            <div class="first-team-text normand-st-reveal normand-st-reveal-right" style="line-height: 2;">
+                                <div class="first-team-role">
                                     <h3 style="color: #c0c0c0;border-bottom: 5px solid;position: relative;width: 250px;">Silver</h3>
                                 </div>
                                 <div class="first-team-name"></div>
@@ -1596,8 +1598,8 @@
                     <div class="featured-team-grid reveal">
                         <div class="first-featured-team-member featured-team-member">
                             <figure class="normand-st-reveal-img first"><img decoding="async" class="first-team-img" src="./wp-content/new_upload/image/image_gold.png" alt="Ed Normand Bio Image" loading="lazy" /></figure>
-                            <div class="first-team-text normand-st-reveal normand-st-reveal-right">
-                                <div class="first-team-role" style="background-color: #;">
+                            <div class="first-team-text normand-st-reveal normand-st-reveal-right" style="line-height: 2;">
+                                <div class="first-team-role">
                                     <h3 style="background-image: linear-gradient(to right, #f6e27a 0, #cb9b51 6%, #f6e27a 25%, #f6f2c0 25%, #f6e27a 25%, #cb9b51 35%, #462523 90%);-webkit-background-clip: text;background-clip: text;color: transparent;border-bottom: 5px solid #cb9b51;position: relative;width: 250px;">Gold</h3>
                                 </div>
                                 <div class="first-team-name"></div>
@@ -1616,8 +1618,8 @@
                     <div class="featured-team-grid reveal">
                         <div class="first-featured-team-member featured-team-member">
                             <figure class="normand-st-reveal-img first"><img decoding="async" class="first-team-img" src="./wp-content/new_upload/image/image_silver.png" alt="Ed Normand Bio Image" loading="lazy" /></figure>
-                            <div class="first-team-text normand-st-reveal normand-st-reveal-right">
-                                <div class="first-team-role" style="-background-color: ;">
+                            <div class="first-team-text normand-st-reveal normand-st-reveal-right" style="line-height: 2;">
+                                <div class="first-team-role">
                                     <h3 style="background-image: linear-gradient(to right, #a8a8a8 0, #878787 22%, #d2d2d2 45%, #d2d2d2 50%, #d2d2d2 55%, #878787 78%, #a8a8a8 100%); -webkit-background-clip: text; background-clip: text; color: transparent; border-bottom: 5px solid #878787 ;position: relative;width: 250px;">Platinum</h3>
                                 </div>
                                 <div class="first-team-name"></div>
@@ -1766,7 +1768,7 @@
                                 <style>
                                     .arrow_svg__fb58a7a9-55a7-455f-a836-5fd4b70d57d3 {
                               fill: none;
-                              stroke: #c1966b;
+                              stroke: #000;
                               stroke-miterlimit: 10
                               }
                            </style>
@@ -1804,9 +1806,10 @@
                         <div class="form-wrap normand-st-reveal">
 	                        <div class='gf_browser_unknown gform_wrapper gform_legacy_markup_wrapper' id='gform_wrapper_1'>
 	         					<div class="contact-links normand-st-reveal">
-	         						<label for="phone" style="color: #fff">Contact Number - +65 8111 8069</label><br>
+	         						<label for="phone" style="color: #fff">Contact Number - +65 8111 8069</label><br><br>
 	         						<label for="email" style="color: #fff">Email - bentley@visionadvisory.sg</label>
 	         						<br>
+                                    <br>
 	         						<br>
 	                                <a class="site-name" style="color: #fff" href="https://goo.gl/maps/7PyaQ38rXmDLiaex9" target="_blank">
 	                                	The Privileged Circle
@@ -1877,25 +1880,23 @@
 
         <script type="text/javascript">
 		function reveal() {
-  var reveals = document.querySelectorAll(".reveal");
+            var reveals = document.querySelectorAll(".reveal");
 
-  for (var i = 0; i < reveals.length; i++) {
-    var windowHeight = window.innerHeight;
-    var elementTop = reveals[i].getBoundingClientRect().top;
-    var elementBottom = reveals[i].getBoundingClientRect().bottom;
-    var elementVisible = 150;
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementBottom = reveals[i].getBoundingClientRect().bottom;
+                var elementVisible = 150;
 
-    if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
-      reveals[i].classList.add("active");
-    } else {
-      reveals[i].classList.remove("active");
-    }
-  }
-}
+                if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
+                reveals[i].classList.add("active");
+                } else {
+                reveals[i].classList.remove("active");
+                }
+            }
+            }
 
-window.addEventListener("scroll", reveal);
-
-
+            window.addEventListener("scroll", reveal);
 		</script>
 
         <script type="text/javascript">

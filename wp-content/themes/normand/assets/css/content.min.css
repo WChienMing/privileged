@@ -54,8 +54,8 @@
 }
 
 .normand-banner {
-/*    height: calc(90vh - 55px);*/
-    height: calc(60vh - 55px);
+   height: calc(90vh - 55px);
+    /* height: calc(60vh - 55px); */
     position: relative;
     /*background-color: #010101;
     background-color: var(--color-theme-black);*/
@@ -461,8 +461,9 @@
 .normand-heading--subtitle {
     text-transform: uppercase;
     margin: 0 0 20px;
-    color: #c1966b;
-    color: var(--color-theme-primary);
+    color: #000;
+    /* color: #c1966b; */
+    /* color: var(--color-theme-primary); */
     font-size: calc(14px + (400vw - 1500px)/1065);
     font-size: var(--h6-font-size)
 }
@@ -1255,9 +1256,9 @@
 }
 
 @media screen and (min-width:1440px) {
-    .first-featured-team-member {
+    /* .first-featured-team-member { */
 /*        margin-bottom: 50px*/
-    }
+    /* } */
 
     .first-featured-team-member figure {
         min-width: 60%
@@ -1996,8 +1997,9 @@ object {
     position: relative;
     background: #010101;
     background: var(--color-theme-black);
-    color: #c1966b;
-    color: var(--color-theme-primary);
+    /* color: #c1966b; */
+    /* color: var(--color-theme-primary); */
+    color: #fff;
     z-index: 1;
     overflow: hidden
 }
