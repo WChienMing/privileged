@@ -49,7 +49,8 @@
 
 @media screen and (min-width:1440px) {
     :root {
-        --content-width: 67rem
+        /* --content-width: 67rem */
+        --content-width: 50rem
     }
 }
 
