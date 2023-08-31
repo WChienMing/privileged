@@ -18,7 +18,7 @@
         <input id="login__password" type="password" name="password" class="form__input" placeholder="Private Code" required>
       </div>
       <div class="form__field">
-        <input type="submit" value="Redirect">
+        <input type="submit" value="Verify">
       </div>
     </form>
   </div>
@@ -27,14 +27,14 @@
 </body>
 </html>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("loginForm");
 
   form.addEventListener("submit", function(event) {
     event.preventDefault();
-    
+
     const password = document.getElementById("login__password").value;
-    
+
     fetch("verify.php", {
       method: "POST",
       headers: {
@@ -46,14 +46,19 @@
     .then(data => {
       if (data.status === "success") {
 
-        window.location.href = "/main.html?code=" + data.code;
+        let expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 1000));
+        let expires = "expires=" + expirationDate.toUTCString();
+
+        document.cookie = "userStatus=success; " + expires + "; path=/";
+
+        window.location.href = "main.html";
       } else {
-
         alert("Invalid code");
-
       }
     });
   });
 });
+
 
 </script>
