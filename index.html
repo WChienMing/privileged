@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <title>THE PRIVILEGED</title>
   <link rel="icon" href="./wp-content/new_upload/icon/icon.png" sizes="32x32" />
-    <link rel="icon" href="./wp-content/new_upload/icon/icon.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="./wp-content/new_upload/icon/icon.png" />
+  <link rel="icon" href="./wp-content/new_upload/icon/icon.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="./wp-content/new_upload/icon/icon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"><link rel="stylesheet" href="./wp-includes/css/style.css">
-
 </head>
-<body>
+<div id="notification-container" class="notification-box fixed top-0 left-0 w-full z-50 p-3 flex flex-col items-center">
+</div>
+
 <body class="align">
   <div class="grid">
     <form id="loginForm" method="POST" class="form login">
@@ -23,42 +25,75 @@
     </form>
   </div>
   <svg xmlns="http://www.w3.org/2000/svg" class="icons"><symbol id="arrow-right" viewBox="0 0 1792 1792"><path d="M1600 960q0 54-37 91l-651 651q-39 37-91 37-51 0-90-37l-75-75q-38-38-38-91t38-91l293-293H245q-52 0-84.5-37.5T128 1024V896q0-53 32.5-90.5T245 768h704L656 474q-38-36-38-90t38-90l75-75q38-38 90-38 53 0 91 38l651 651q37 35 37 90z"/></symbol><symbol id="lock" viewBox="0 0 1792 1792"><path d="M640 768h512V576q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28H416q-40 0-68-28t-28-68V864q0-40 28-68t68-28h32V576q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z"/></symbol><symbol id="user" viewBox="0 0 1792 1792"><path d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z"/></symbol></svg>
-</body>
-</body>
-</html>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const form = document.getElementById("loginForm");
+    const form = document.getElementById("loginForm");
 
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    const password = document.getElementById("login__password").value;
+        const password = document.getElementById("login__password").value;
 
-    fetch("verify.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ password })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === "success") {
+        fetch("verify.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
 
-        let expirationDate = new Date();
-        expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 1000));
-        let expires = "expires=" + expirationDate.toUTCString();
+                    let expirationDate = new Date();
+                    expirationDate.setTime(expirationDate.getTime() + (2 * 60 * 60 * 1000));
+                    let expires = "expires=" + expirationDate.toUTCString();
 
-        document.cookie = "userStatus=success; " + expires + "; path=/";
+                    document.cookie = "userStatus=success; " + expires + "; path=/";
 
-        window.location.href = "main.html";
-      } else {
-        alert("Invalid code");
-      }
+                    window.location.href = "main.html";
+                } else {
+                    sendNotification('error', 'Invalid code.');
+                }
+            });
     });
-  });
 });
 
 
+function sendNotification(type, text) {
+    let notificationBox = document.querySelector(".notification-box");
+    const alerts = {
+
+        error: {
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>`,
+            color: "red-500"
+        },
+    };
+    let component = document.createElement("div");
+    component.className = `relative flex items-center bg-${alerts[type].color} text-white text-sm font-bold px-1.5 rounded-md opacity-0 transform transition-all duration-500 mb-1`;
+    component.innerHTML = `${alerts[type].icon}<p>${text}</p>`;
+    notificationBox.appendChild(component);
+    setTimeout(() => {
+        component.classList.remove("opacity-0");
+        component.classList.add("opacity-1");
+    }, 1);
+    setTimeout(() => {
+        component.classList.remove("opacity-1");
+        component.classList.add("opacity-0");
+        component.style.margin = 0;
+        component.style.padding = 0;
+    }, 5000);
+    setTimeout(() => {
+        component.style.setProperty("height", "0", "important");
+    }, 5100);
+    setTimeout(() => {
+        notificationBox.removeChild(component);
+    }, 5700);
+}
 </script>
+</body>
+</html>
