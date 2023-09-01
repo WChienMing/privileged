@@ -4,7 +4,7 @@ header("Content-Type: application/json");
 $db_host = "localhost";
 $db_user = "priviled";
 $db_password = "7cw1Y=1{dmMt";
-$db_name = "privileged";
+$db_name = "priviled_database";
 $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 
 if ($conn->connect_error) {
